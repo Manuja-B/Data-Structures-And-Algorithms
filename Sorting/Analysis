@@ -31,10 +31,18 @@ Divide array into two halves recursively until it become so smalll that it can't
 Then merge each of the broken pieces by placing in sorted order.
 
 Merge sort algorithm gurantees stability and its time complexity is O(nlogn).
+Space Complexity: O(n)
 But when space is concern, merge sort shouldn't be used.
 Java 6 and lower versions use merge sort for inbuilt sorting functions.
 
-#Heap Sort
+## Quick Sort
+It is a divide and conquer algorithm. It picks an element as pivot and partitions given array around that pivot element.
+
+Time Complexity: O(nlogn)
+Space Complexity: O(n)
+Quick sort is not a stable sort.
+
+## Heap Sort
 Uses heap binary tree. 
 It inserts all that need to be sorted in a binary tree. It foolows MinHeap property for insertion.
 It removes top most element and inserts in current array. 
