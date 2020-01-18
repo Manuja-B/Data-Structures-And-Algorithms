@@ -1,7 +1,7 @@
 ## Bubble Sort
 Repeatedly swap adjacent elements if they are in wrong order.
 
-Time Complexity : n^2
+Time Complexity : O(n^2)
 Space Complexity : 1 , no extra space is used
 
 Bubble sort is efficient when input is already sorted. 
@@ -10,17 +10,37 @@ But when array is long, bubble sort takes a lot of time to do sorting
 
 ## Selection Sort
 Find minimum or maximum element in an unsorted array and then putting it in its correct position in a sorted array.
-Time Complexity : n^2
+
+Time Complexity : O(n^2)
 Space Complexity : 1 , no extra space is used
 
 
 ##Insertion Sort
+For eac iteration, find correct position of element.
 
-
-Time Complexity : n^2
+Time Complexity : O(n^2)
 Space Complexity : 1 , no extra space is used
 
 Insertion doesn't use any extra space.
 Best when we have continous numbers adding to array, because it makes sure where the new incoming number should be placed.
 
 The choice of which algorithm to be used depends on the available resources. Like in embedded systems
+
+## Merge Sort
+Divide array into two halves recursively until it become so smalll that it can't further be divided. 
+Then merge each of the broken pieces by placing in sorted order.
+
+Merge sort algorithm gurantees stability and its time complexity is O(nlogn).
+But when space is concern, merge sort shouldn't be used.
+Java 6 and lower versions use merge sort for inbuilt sorting functions.
+
+#Heap Sort
+Uses heap binary tree. 
+It inserts all that need to be sorted in a binary tree. It foolows MinHeap property for insertion.
+It removes top most element and inserts in current array. 
+It keeps doing this until binary tree is not empty.
+
+Time complexity: O(nlogn)  (to insert and extract elements from binary tree - O(logn). For n elements O(n)*O(logn))
+Space Complexity: O(1) (we can use given array itself to create heap in it, extract data and put it back in same array)
+
+It can be used when space is a concern. But it is not a stable sort. Two same numbers can change their orginal positions after sorting.
