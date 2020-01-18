@@ -15,3 +15,12 @@ Space Complexity : 1 , no extra space is used
 
 
 ##Insertion Sort
+
+
+Time Complexity : n^2
+Space Complexity : 1 , no extra space is used
+
+Insertion doesn't use any extra space.
+Best when we have continous numbers adding to array, because it makes sure where the new incoming number should be placed.
+
+The choice of which algorithm to be used depends on the available resources. Like in embedded systems
