@@ -1,0 +1,5 @@
+Time Complexity : n^2
+Space Complexity : 1 , no extra space is used
+
+Bubble sort is efficient when input is already sorted. 
+It can be used when space is a concern.
