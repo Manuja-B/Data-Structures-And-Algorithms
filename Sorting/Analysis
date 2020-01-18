@@ -1,4 +1,5 @@
-Bubble Sort
+## Bubble Sort
+Repeatedly swap adjacent elements if they are in wrong order.
 
 Time Complexity : n^2
 Space Complexity : 1 , no extra space is used
@@ -6,3 +7,11 @@ Space Complexity : 1 , no extra space is used
 Bubble sort is efficient when input is already sorted. 
 It can be used when space is a concern.
 But when array is long, bubble sort takes a lot of time to do sorting
+
+## Selection Sort
+Find minimum or maximum element in an unsorted array and then putting it in its correct position in a sorted array.
+Time Complexity : n^2
+Space Complexity : 1 , no extra space is used
+
+
+##Insertion Sort
