@@ -27,7 +27,7 @@ Best when we have continous numbers adding to array, because it makes sure where
 The choice of which algorithm to be used depends on the available resources. Like in embedded systems
 
 ## Merge Sort
-Divide array into two halves recursively until it become so smalll that it can't further be divided. 
+Divide array into two halves recursively until it become so small that it can't further be divided. 
 Then merge each of the broken pieces by placing in sorted order.
 
 Merge sort algorithm gurantees stability and its time complexity is O(nlogn).
