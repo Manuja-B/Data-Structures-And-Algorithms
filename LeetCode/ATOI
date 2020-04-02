@@ -1,0 +1,47 @@
+class Solution {
+    public int myAtoi(String str) {
+         boolean isDigit=false;
+        int no=0;
+        int count=0;
+        int length=str.length();
+        int int_min=(int)(-1 * Math.pow(2,31));
+        int int_max=(int)(1*Math.pow(2,31));
+		for(int i=0; i<str.length(); i++) {
+            if(Character.isDigit(str.charAt(0)) || str.charAt(0)=='-' || str.charAt(0)=='+' || str.charAt(0)==' '){
+			if(Character.isDigit(str.charAt(i)) || str.charAt(i)=='-' || str.charAt(i)=='+' && str.charAt(i)!='.') {
+				count++;
+				isDigit=true;
+			}
+			else {
+				if(isDigit) {
+					no=Integer.parseInt(str.substring(i-count, i));
+			        
+					isDigit=false;
+					count=0;
+                    
+                    return no;
+                    
+				}
+			}
+            }
+		}
+      
+        try{
+		if(count>0 && isDigit) {
+            
+			no=Integer.parseInt(str.substring(length-count, length));
+            System.out.println("numberrrr"+no);
+            
+		}}
+        catch(NumberFormatException nfe){
+           
+           return int_min;
+            
+        }
+        
+        
+            return no;
+        
+
+    }
+}
