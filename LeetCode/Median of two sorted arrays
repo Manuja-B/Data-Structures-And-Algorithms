@@ -1,0 +1,50 @@
+There are two sorted arrays nums1 and nums2 of size m and n respectively.
+
+Find the median of the two sorted arrays. The overall run time complexity should be O(log (m+n)).
+
+You may assume nums1 and nums2 cannot be both empty.
+
+Example 1:
+
+nums1 = [1, 3]
+nums2 = [2]
+
+The median is 2.0
+Example 2:
+
+nums1 = [1, 2]
+nums2 = [3, 4]
+
+The median is (2 + 3)/2 = 2.5
+
+
+Solution:
+class Solution {
+    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+        int l1=nums1.length;
+        int l2=nums2.length;
+        int[] merged_arr=new int[l1+l2];
+        double res=0.0;
+        for(int a=0; a<l1; a++){
+            merged_arr[a]=nums1[a];
+        }
+        for(int b=0; b<l2; b++){
+            merged_arr[b+l1]=nums2[b];
+        }
+        System.out.println("Mergedddd "+Arrays.toString(merged_arr));
+        Arrays.sort(merged_arr);
+        if(merged_arr.length%2!=0){
+            int index=(merged_arr.length-1)/2;
+            res=merged_arr[index];
+            return res;     
+        }
+        else{
+            int index1=merged_arr.length/2;
+            int index2=merged_arr.length/2 -1;
+            res=((double)merged_arr[index1]+(double)merged_arr[index2])/2;
+            return res;
+        }
+        
+        
+    }
+}
