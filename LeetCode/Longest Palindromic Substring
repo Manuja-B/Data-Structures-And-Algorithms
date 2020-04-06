@@ -13,6 +13,7 @@ Output: "bb"
 Procedure:
 1. Check all substrings and check if they are palindrome O(n3)
 2. DP
+3. Expand around the center
 
 Solution:
 class Solution {
