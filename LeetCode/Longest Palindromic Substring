@@ -10,6 +10,10 @@ Example 2:
 Input: "cbbd"
 Output: "bb"
 
+Procedure:
+1. Check all substrings and check if they are palindrome O(n3)
+2. DP
+
 Solution:
 class Solution {
     public String longestPalindrome(String s) {
