@@ -1,0 +1,75 @@
+Problem: Given two strings S and T, return if they are equal when both are typed into empty text editors. # means a backspace character.
+
+Example 1:
+
+Input: S = "ab#c", T = "ad#c"
+Output: true
+Explanation: Both S and T become "ac".
+Example 2:
+
+Input: S = "ab##", T = "c#d#"
+Output: true
+Explanation: Both S and T become "".
+Example 3:
+
+Input: S = "a##c", T = "#a#c"
+Output: true
+Explanation: Both S and T become "c".
+Example 4:
+
+Input: S = "a#c", T = "b"
+Output: false
+Explanation: S becomes "c" while T becomes "b".
+
+Solution1:
+
+class Solution {
+    public boolean backspaceCompare(String S, String T) {
+        Stack<Character> stack1=new Stack();
+        for(int i=0; i<S.length(); i++){
+            if(S.charAt(i)!='#'){
+                stack1.push(S.charAt(i));
+            }
+            else if(!stack1.isEmpty()){
+                stack1.pop();
+            }
+        }
+        char[] c1=new char[stack1.size()];
+        System.out.println("lll "+c1.length);
+        int t=0;
+       
+      while(!stack1.isEmpty()){
+            c1[t]=stack1.pop();
+            t++;
+        }
+        
+        Stack<Character> stack2=new Stack();
+        for(int i=0; i<T.length(); i++){
+            if(T.charAt(i)!='#'){
+                stack2.push(T.charAt(i));
+            }
+            else if(!stack2.isEmpty()){
+                stack2.pop();
+            }
+        }
+        char[] c2=new char[stack2.size()];
+        System.out.println("lll "+c2.length);
+        
+        int t2=0;
+      while(!stack2.isEmpty()){
+            c2[t2]=stack2.pop();
+            t2++;
+        }
+        String s1=null;
+        String s2=null;
+        s1=Arrays.toString(c1);
+        s2=Arrays.toString(c2);
+        if(s1.equals(s2)){
+           return true; 
+        }
+        else{
+            return false;
+        }
+        
+    }
+}
