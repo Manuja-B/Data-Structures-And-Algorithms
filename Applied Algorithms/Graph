@@ -1,1 +1,96 @@
+Topological Sort
+
+import org.junit.Test;
+
+import java.util.*;
+import java.util.stream.Collectors;
+
+import static org.junit.Assert.*;
+
+public class TopSort {
+	
+    static class Node {
+        int id;
+        List<Node> neighbors = new ArrayList<>();
+
+        public Node(int id) {
+            this.id = id;
+        }
+    }
+
+    static class Graph {
+        Node[] nodes;
+
+        /**
+         * @param n the number of nodes in the graph
+         */
+        public Graph(int n) {
+            nodes = new Node[n];
+            for (int i = 0; i < n; i++) {
+                nodes[i] = new Node(i);
+            }
+        }
+
+        void addEdge(int begin, int end) {
+            nodes[begin].neighbors.add(nodes[end]);
+        }
+    }
+
+    void dfs(Node node, Set<Node> visited, List<Node> order) {
+    	visited.add(node);
+    	List<Node> list=new ArrayList<>();
+    	list.addAll(node.neighbors);
+    	List<Node> emptyorderedlist=new ArrayList<>();
+    	if(!order.contains(node)) {
+    		emptyorderedlist.add(node);
+    	}
+    
+    	int len=list.size();
+    	for(int i=0; i<len; i++) {
+    		if(!visited.contains(list.get(i))) {
+    			dfs(list.get(i), visited, order);
+    		}
+    	}
+    	order.addAll(emptyorderedlist);
+    }
+
+    List<Node> topSort(Graph g) {
+        Set<Node> visited = new HashSet<>();
+        List<Node> order = new ArrayList<>();
+        TopSort ts=new TopSort();
+        int len=g.nodes.length;
+        for(int i=0; i< len; i++) {
+        	Node n=g.nodes[i];
+        	dfs(n, visited, order);
+        }
+        Collections.reverse(order);
+        return order;
+    }
+
+    static private List<Integer> getIds(List<Node> nodes) {
+        return nodes.stream().map(node -> node.id).collect(Collectors.toList());
+    }
+
+    @Test
+    public void test1() {
+        Graph g = new Graph(6);
+        g.addEdge(3, 2);
+        g.addEdge(3, 1);
+        g.addEdge(2, 1);
+        g.addEdge(2, 4);
+        g.addEdge(1, 0);
+        g.addEdge(0, 4);
+        g.addEdge(4, 5);
+        assertEquals(getIds(topSort(g)), Arrays.asList(3, 2, 1, 0, 4, 5));
+    }
+
+    @Test
+    public void test2() {
+        Graph g = new Graph(3);
+        g.addEdge(1, 2);
+        g.addEdge(1, 0);
+        List<Integer> sort = getIds(topSort(g));
+        assertTrue(sort.equals(Arrays.asList(1, 0, 2)) || sort.equals(Arrays.asList(1, 2, 0)));
+    }
+}
 
