@@ -12,7 +12,7 @@ Example 2:
 Input: root = [1,null,2,3,4,5,null,null,6,7,null,8,null,9,10,null,null,11,null,12,null,13,null,null,14]
 Output: [1,2,3,6,7,11,14,4,8,12,5,9,13,10]
 
-Solution 1: (using recursion) 1 ms
+Solution 1a: (using recursion) 1 ms
 /*
 // Definition for a Node.
 class Node {
@@ -45,6 +45,32 @@ class Solution {
         }
         return output;
         
+    }
+}
+Solution 1b: (using recursion, but we use different function and we dont do addall to add all children here) 0 ms (MOST EFFICIENT)
+class Solution {
+    public List<Integer> preorder(Node root) {
+        List<Integer> res = new ArrayList<>();
+        if (root == null){
+            return res;
+        }
+        dfs(res, root);
+        return res;
+    }
+    
+    private void dfs(List<Integer> res, Node root){
+        if (root == null){
+            return;
+        }
+        
+        res.add(root.val);
+        if (root.children == null || root.children.size() == 0){
+            return;
+        }
+        
+        for (Node cur : root.children){
+            dfs(res, cur);
+        }
     }
 }
 
