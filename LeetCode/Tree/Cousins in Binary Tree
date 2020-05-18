@@ -1,0 +1,137 @@
+Problem: In a binary tree, the root node is at depth 0, and children of each depth k node are at depth k+1.
+
+Two nodes of a binary tree are cousins if they have the same depth, but have different parents.
+
+We are given the root of a binary tree with unique values, and the values x and y of two different nodes in the tree.
+
+Return true if and only if the nodes corresponding to the values x and y are cousins.
+Example 1:
+Input: root = [1,2,3,4], x = 4, y = 3
+Output: false
+
+Example 2:
+Input: root = [1,2,3,null,4,null,5], x = 5, y = 4
+Output: true
+
+Example 3:
+Input: root = [1,2,3,null,4], x = 2, y = 3
+Output: false
+
+Constraints:
+The number of nodes in the tree will be between 2 and 100.
+Each node has a unique integer value from 1 to 100.
+
+Solution 1: 5% bad 
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public boolean isCousins(TreeNode root, int x, int y) {
+        int[] xinfo=new int[2];
+        int[] yinfo=new int[2];
+        TreeNode parent=null;
+        if(root==null){
+            return false;
+        }
+        dfs(root, x, y, 0, null, xinfo, yinfo);
+        for(int i=0; i<2; i++){
+          System.out.println("X "+xinfo[i]);
+          System.out.println("Y "+yinfo[i]);  
+        }
+        if(xinfo[0]==yinfo[0] && xinfo[1]!=yinfo[1]){
+            return true;
+        }
+        else{
+            return false;
+        }
+            
+      
+        
+    }
+   public void dfs(TreeNode root, int x, int y, int depth, TreeNode parent, int[] xinfo, int[] yinfo){
+       if(root==null){
+            return;
+        }
+        if(root.val==x){
+            xinfo[0]=depth;
+            if(depth==0){
+                xinfo[1]=root.val;
+            }
+            else{
+               xinfo[1]=parent.val; 
+            }
+            
+        }
+        if(root.val==y){
+            yinfo[0]=depth;
+             if(depth==0){
+                yinfo[1]=root.val;
+            }
+            else{
+               yinfo[1]=parent.val; 
+            }
+        }
+        dfs(root.left, x, y, depth+1, root, xinfo, yinfo);
+        dfs(root.right, x, y, depth+1, root, xinfo, yinfo);
+    }
+}
+
+Solution 2: Don't use array unecessarily. Use global variables, doesn't work if you use local variables 
+class Solution {
+    int xdepth;
+    int ydepth;
+    int xparent;
+    int yparent;
+    public boolean isCousins(TreeNode root, int x, int y) {
+        TreeNode parent=null;
+        if(root==null){
+            return false;
+        }
+        dfs(root, x, y, 0, null);
+        if(xdepth==ydepth && xparent!=yparent){
+            return true;
+        }
+        else{
+            return false;
+        }   
+    }
+   public void dfs(TreeNode root, int x, int y, int depth, TreeNode parent){
+       if(root==null){
+            return;
+        }
+        if(root.val==x){
+            xdepth=depth;
+            if(depth==0){
+                xparent=root.val;
+            }
+            else{
+               xparent=parent.val; 
+            }
+            
+        }
+        if(root.val==y){
+            ydepth=depth;
+             if(depth==0){
+                yparent=root.val;
+            }
+            else{
+               yparent=parent.val; 
+            }
+        }
+        dfs(root.left, x, y, depth+1, root);
+        dfs(root.right, x, y, depth+1, root);
+    }
+}
+
