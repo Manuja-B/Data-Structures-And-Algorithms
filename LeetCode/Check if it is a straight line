@@ -1,0 +1,29 @@
+Problem: You are given an array coordinates, coordinates[i] = [x, y], where [x, y] represents the coordinate of a point. Check if these points make a straight line in the XY plane.
+ 
+Example 1:
+Input: coordinates = [[1,2],[2,3],[3,4],[4,5],[5,6],[6,7]]
+Output: true
+
+Example 2:
+Input: coordinates = [[1,1],[2,2],[3,4],[4,5],[5,6],[7,7]]
+Output: false
+
+Solution:
+class Solution {
+    public boolean checkStraightLine(int[][] coordinates) {
+        if(coordinates.length==2){
+            return true;
+        }
+        //Slope between first and second point equals to slope between first and every other point
+        //(y1-y0)/(x1-x0)=(yi-y0)/(xi-x0)
+        int[] point1=coordinates[0];
+        int[] point2=coordinates[1];
+        
+        for(int i=2; i<coordinates.length; i++){
+            int[] point=coordinates[i];
+            if(((point2[1]-point1[1])*(point[0]-point1[0]))!=((point[1]-point1[1])*(point2[0]-point1[0])))
+                return false;
+        }
+       return true;
+    }
+}
