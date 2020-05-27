@@ -29,8 +29,7 @@ class Solution {
 }
 
 Solution 2:
-```
-1. Using AND we find position where carry is generated.
+```1. Using AND we find position where carry is generated.
 2. Using XOR we actually add the bits
 3. Using leftshift << we turn the carry to what I want to apply for the next iteration
 Ex: a= 1 which is 0001 and b=3, which is 0011
@@ -38,8 +37,7 @@ Ex: a= 1 which is 0001 and b=3, which is 0011
 2. XOR gives 0010
 3. << gives 0010
 Now add carry and sum(XOR result) 0010^0010 = 0000  0010&&0010= 0010 and left shifting gives 0100
-Thus final sum is 0000^0100= 0100 = 4
-```
+Thus final sum is 0000^0100= 0100 = 4```
 
 class Solution {
     public int getSum(int a, int b) {
