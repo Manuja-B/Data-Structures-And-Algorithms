@@ -30,6 +30,9 @@ class Solution {
 
 Solution 2:
 ```
+$ kubectl patch service grafana --patch '{"spec":{"type":"LoadBalancer"}}' -n istio-system
+```
+```
 $ 1. Using AND we find position where carry is generated.
 $ 2. Using XOR we actually add the bits
 $ 3. Using leftshift << we turn the carry to what I want to apply for the next iteration
