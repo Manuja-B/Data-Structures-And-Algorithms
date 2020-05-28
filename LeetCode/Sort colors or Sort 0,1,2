@@ -1,0 +1,81 @@
+Problem: Given an array with n objects colored red, white or blue, sort them in-place so that objects of the same color are adjacent, with the colors in the order red, white and blue.
+
+Here, we will use the integers 0, 1, and 2 to represent the color red, white, and blue respectively.
+
+Note: You are not suppose to use the library's sort function for this problem.
+
+Example:
+
+Input: [2,0,2,1,1,0]
+Output: [0,0,1,1,2,2]
+Follow up:
+
+A rather straight forward solution is a two-pass algorithm using counting sort.
+First, iterate the array counting number of 0's, 1's, and 2's, then overwrite array with total number of 0's, then 1's and followed by 2's.
+Could you come up with a one-pass algorithm using only constant space?
+
+Solution 1: TWO PASS
+class Solution {
+    public void sortColors(int[] nums) {
+        if(nums == null || nums.length <= 1) return;
+        int len = nums.length;
+        int two = 0, one = 0, zero = 0;
+        
+        for(int i = 0; i < len; i++){
+            if(nums[i] == 0) zero++;
+            if(nums[i] == 2) two++;
+            if(nums[i] == 1) one++;
+        }
+        for(int i = 0; i < len; i++){
+            if(i < zero) nums[i] =0;
+            else if(i < zero + one) nums[i] =1;
+            else nums[i] =2;
+        }
+    }
+}
+
+Solution 2: ONE PASS DUTCH NATIONAL FLAG
+
+(i) Initialize the low, mid and high pointers to, low = 0, mid = 0, high = N
+(ii) Now, run a loop and do the following until the mid pointer finally meets high pointer.As the mid pointer moves forward we keep putting the element at mid pointer to its right position by swapping that element with the element at pointers of respective sections.
+(iii) CASE – I : If the element at mid, that is, A[mid] == 0, this means the correct position of this element is in the range [0, low-1], therefore, we swap A[mid] with A[low]and increment low making sure that element with index lesser than low is a Zero.
+(iv) CASE – II : If the element at mid, that is, A[mid] == 2, this means the correct position of this element is in the range [hi+1, N], therefore, we swap A[mid] with A[hi] and decrement high making sure that element with index greater than high is a two.
+(v) CASE – III : If the element at mid, that is, A[mid]=1, this means that the element is already in its correct segment because [low, mid-1] is the range where it needs to be. Therefore, we do nothing and simply increment the mid pointer.
+
+So, there are total three cases, let us take a moment and emphasise on the fact that mid pointer gets only incremented only when the element A[mid] == 1.
+Let us discuss every case individually,
+
+For case – I : In this case we increment mid as well along with increment low pointer, as we are sure that element at low pointer before swapping can surely only be one as had it been a two, it would have already got swapped with high pointer when mid pointer explored it as the only reason that mid pointer left it because it was a one.
+
+For case – II : Now, In this case we swap the element at mid and high, but unlike case – I, in this case we are not sure about the element which will come at mid index after swapping as the element at high index before swapping can be any of zero, one or two, therefore, we need to explore this swapped element and hence we do not increment mid pointer in this case.
+
+For case – III : There is no confusion regarding incrementing mid in this case as already discussed, as we know the element at mid is one therefore we definitely need to increment mid here.
+
+Time complexity of this algorithm is also O(n) but it sorts the array in just a single pass and without any extra space unlike previous approach.
+
+
+class Solution {
+    public void sortColors(int[] nums) {
+       int low=0, mid=0, high=nums.length-1;
+        while(mid<=high){
+            if(nums[mid]==0){
+                int temp=nums[mid];
+                nums[mid]=nums[low];
+                nums[low]=temp;
+                mid++;
+                low++;
+            }
+            else if(nums[mid]==2){
+                int temp=nums[mid];
+                nums[mid]=nums[high];
+                nums[high]=temp;
+                high--;
+            }
+            else{
+                mid++;
+            }
+        }
+        System.out.println(nums);
+        
+    }
+}
