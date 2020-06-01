@@ -42,6 +42,12 @@ class Solution {
 }
 
 Solution: ITERATIVE
+Create empty stack and pust root node to it.
+Do the following when stack is not empty
+Pop a node from stack and print it
+Push right child of popped node to stack
+Push left child of popped node to stack
+
 class Solution {
     public List<Integer> preorderTraversal(TreeNode root) {
         Stack<TreeNode> s=new Stack<>();
