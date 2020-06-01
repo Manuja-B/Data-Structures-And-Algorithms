@@ -25,6 +25,14 @@ class Solution {
 }
 
 Solution: ITERATIVE even if two loops NOTE: TC is O(n)
+Create an empty stack s and Initialize currentNode as root
+Push the currentNode to s and set currentNode = currentNode.left until currentNode is NULL
+If currentNode is NULL and s is not empty then
+   Pop the top node from stack s and print it
+   set currentNode = currentNode.right
+   go to step 2
+If stack is empty and currentNode is also null then we are done with it
+
 class Solution {
     
     public List<Integer> inorderTraversal(TreeNode root) {
