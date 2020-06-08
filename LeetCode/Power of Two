@@ -1,0 +1,46 @@
+Problem: Given an integer, write a function to determine if it is a power of two.
+
+Example 1:
+
+Input: 1
+Output: true 
+Explanation: 20 = 1
+Example 2:
+
+Input: 16
+Output: true
+Explanation: 24 = 16
+Example 3:
+
+Input: 218
+Output: false
+
+Solution 1: SLOW SOLUTION
+class Solution {
+    public boolean isPowerOfTwo(int n) {
+       
+        long i=1;
+        while(i<n){
+            i*=2;
+        }
+        
+        return i==n;
+    }
+}
+
+Solution 2: USING BITWISE OPERATORS
+n summary, -x−x is the same as \lnot x + 1¬x+1. This operation reverts all bits of x except the rightmost 1-bit.
+
+o let's do x & (-x) to keep the rightmost 1-bit and to set all the others bits to zero. As discussed above, for the power of two it would result in x itself, since a power of two contains just one 1-bit.
+
+Other numbers have more than 1-bit in their binary representation and hence for them x & (-x) would not be equal to x itself.
+
+Hence a number is a power of two if x & (-x) == x.
+
+class Solution {
+  public boolean isPowerOfTwo(int n) {
+    if (n == 0) return false;
+    long x = (long) n;
+    return (x & (x - 1)) == 0;
+  }
+}
