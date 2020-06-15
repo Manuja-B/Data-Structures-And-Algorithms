@@ -1,0 +1,55 @@
+
+Solution 0: My first approach was too ignorant. I didnt consider the properties of BST, rather just continued to search the node in preorder and return it
+class Solution {
+    public TreeNode searchBST(TreeNode root, int val) {
+        TreeNode result=null;
+        Stack<TreeNode> s=new Stack<>();
+        s.push(root);
+        while(!s.isEmpty()){
+            TreeNode curr=s.pop();
+            if(curr.val==val){
+                return curr;
+            }
+            else{
+                if(curr.right!=null){
+                    s.push(curr.right);
+                }
+                if(curr.left!=null){
+                    s.push(curr.left);
+                }
+                
+            }
+        }
+        return null;   
+        
+    }
+}
+
+Solution 1: ITERATIVE
+class Solution {
+    public TreeNode searchBST(TreeNode root, int val) {
+         while(root!=null && val!=root.val){
+            if(val<root.val)
+                root=root.left;
+            else
+                root=root.right;
+        }
+        return root;
+        
+    }
+}
+
+Solution 2: RECURSIVE
+class Solution {
+    public TreeNode searchBST(TreeNode root, int val) {
+        if(root==null || val==root.val) return root; 
+        
+        if(val<root.val){
+            return searchBST(root.left, val);
+        }
+        else{
+            return searchBST(root.right, val);
+        }
+        
+    }
+}
