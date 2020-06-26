@@ -9,7 +9,7 @@ Note:
 You must do this in-place without making a copy of the array.
 Minimize the total number of operations.
 
-Solution:
+Solution 1: SLOW
 class Solution {
     public void moveZeroes(int[] nums) {
          int count=0;
@@ -25,5 +25,20 @@ class Solution {
         }
         System.out.println(Arrays.toString(nums));
         
+    }
+}
+
+Solution 2: FAST
+class Solution {
+    public void moveZeroes(int[] nums) {
+        int count=0;
+        for(int i=0; i<nums.length; i++){
+            if(nums[i]!=0){
+                nums[count++]=nums[i];
+            }
+        }
+        while(count<nums.length){
+            nums[count++]=0;
+        }
     }
 }
