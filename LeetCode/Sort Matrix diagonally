@@ -1,0 +1,44 @@
+Problem: Given a m * n matrix mat of integers, sort it diagonally in ascending order from the top-left to the bottom-right then return the sorted array.
+
+Example 1:
+Input: mat = [[3,3,1,1],[2,2,1,2],[1,1,1,2]]
+Output: [[1,1,1,1],[1,2,2,2],[1,2,3,3]]
+ 
+Constraints:
+m == mat.length
+n == mat[i].length
+1 <= m, n <= 100
+1 <= mat[i][j] <= 100
+
+Solution: //collect the diagonal elements, sort them and put back
+class Solution {
+    public int[][] diagonalSort(int[][] mat) {
+        updateMatrix(0,0,mat);
+        for (int i=1;i<mat.length;i++) {
+            updateMatrix(i,0,mat);
+        }
+        for (int i=1;i<mat[0].length;i++) {
+            updateMatrix(0,i,mat);
+        }
+        return mat;
+    }
+    
+    public void updateMatrix(int x, int y, int[][] mat) {
+        List<Integer> res = new ArrayList();
+        int currX = x;
+        int currY = y;
+        while (x < mat.length && y < mat[0].length) {
+            res.add(mat[x][y]);
+            x++;
+            y++;
+        }
+        Collections.sort(res);
+        int index = 0;
+        while (currX < mat.length && currY < mat[0].length) {
+            mat[currX][currY] = res.get(index);
+            index++;
+            currX++;
+            currY++;
+        }
+    }
+}
