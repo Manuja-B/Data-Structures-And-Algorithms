@@ -1,0 +1,91 @@
+Problem:
+Implement a trie with insert, search, and startsWith methods.
+
+Example:
+
+Trie trie = new Trie();
+
+trie.insert("apple");
+trie.search("apple");   // returns true
+trie.search("app");     // returns false
+trie.startsWith("app"); // returns true
+trie.insert("app");   
+trie.search("app");     // returns true
+Note:
+
+You may assume that all inputs are consist of lowercase letters a-z.
+All inputs are guaranteed to be non-empty strings.
+
+Solution:
+class TrieNode{
+    boolean end;
+    char cur;
+    Map<Character, TrieNode> children;
+    
+    public TrieNode(char ch){
+        this.cur = ch;
+        this.children = new HashMap<>();
+        this.end = false;
+    }
+}
+
+class Trie {
+   TrieNode head; // Initialize a dummy head
+    
+    /** Initialize your data structure here. */
+    public Trie() {
+        this.head = new TrieNode('0');
+    }
+    
+    
+    /** Inserts a word into the trie. */
+    public void insert(String word) {
+        TrieNode cur=head;
+       for(int i=0; i<word.length(); i++){
+         if(!cur.children.containsKey(word.charAt(i))){ // Everytime insert the character into it's children
+                cur.children.put(word.charAt(i), new TrieNode(word.charAt(i)));
+            }
+            cur = cur.children.get(word.charAt(i)); // Move current position into next
+                     
+        }
+        cur.end = true;  // End
+    
+    }
+    
+    /** Returns if the word is in the trie. */
+    public boolean search(String word) {
+        
+     TrieNode cur = head;
+        for(int i=0; i< word.length(); i++){
+		// Case1: Contains the current check Charater, then keep searching
+            if(cur.children.containsKey(word.charAt(i))){ 
+                cur = cur.children.get(word.charAt(i));
+            }else{ // Case2: Not contain, early stop return false;
+                return false;
+            }
+        }
+        return cur.end; // If not end, means not a word
+        }
+    
+    
+    /** Returns if there is any word in the trie that starts with the given prefix. */
+    public boolean startsWith(String prefix) {
+   TrieNode cur = head;
+        for(int i=0; i< prefix.length(); i++){ // Similar check with Search function
+            if(cur.children.containsKey(prefix.charAt(i))){
+                cur = cur.children.get(prefix.charAt(i));
+            }else{
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+/**
+ * Your Trie object will be instantiated and called as such:
+ * Trie obj = new Trie();
+ * obj.insert(word);
+ * boolean param_2 = obj.search(word);
+ * boolean param_3 = obj.startsWith(prefix);
+ */
