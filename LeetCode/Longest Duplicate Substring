@@ -1,0 +1,50 @@
+Problem:Given a string S, consider all duplicated substrings: (contiguous) substrings of S that occur 2 or more times.  (The occurrences may overlap.)
+
+Return any duplicated substring that has the longest possible length.  (If S does not have a duplicated substring, the answer is "".)
+
+Example 1:
+Input: "banana"
+Output: "ana"
+Example 2:
+Input: "abcd"
+Output: ""
+ 
+
+Note:
+2 <= S.length <= 10^5
+S consists of lowercase English letters.
+
+Solution 1: TLE
+class Solution {
+    public String longestDupSubstring(String S) {
+        HashMap<String, Integer> hm=new HashMap<>();
+        
+          
+       for(int i=1; i<=S.length(); i++){
+           for(int j=0; j<=S.length() && i+j<=S.length(); j++){
+               String s=S.substring(j, j+i);
+               if(!hm.containsKey(s)){
+                   hm.put(s, 1); 
+               }
+               else{
+                   hm.put(s, hm.get(s)+1);
+               }
+               
+           }
+       }
+       int maxlen=0;
+        String res="";
+       for(Map.Entry<String, Integer> e: hm.entrySet()){
+           if(e.getValue()>1){
+            String s=e.getKey();
+               if(s.length()>maxlen){
+                   maxlen=s.length();
+                   res=s;
+               }
+           }
+       }
+        
+        return res;
+}
+    
+}
