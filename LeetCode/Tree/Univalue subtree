@@ -1,0 +1,43 @@
+Problem: A binary tree is univalued if every node in the tree has the same value.
+
+Return true if and only if the given tree is univalued.
+
+Example 1:
+Input: [1,1,1,1,1,null,1]
+Output: true
+Example 2:
+Input: [2,2,2,5,2]
+Output: false
+ 
+Note:
+The number of nodes in the given tree will be in the range [1, 100].
+Each node's value will be an integer in the range [0, 99].
+
+Solution:
+class Solution {
+    public boolean isUnivalTree(TreeNode root) {
+        boolean uni=false;
+        int no=root.val;
+        Stack<TreeNode> stack=new Stack<>();
+        stack.push(root);
+        while(!stack.isEmpty()){
+            TreeNode curr=stack.pop();
+            if(curr.val==no){
+                uni=true;
+            }
+            else{
+                uni=false;
+                return uni;
+            }
+            if(curr.left!=null){
+                stack.push(curr.left);
+            }
+            if(curr.right!=null){
+                stack.push(curr.right);
+            }
+            
+        }
+        return uni;
+        
+    }
+}
