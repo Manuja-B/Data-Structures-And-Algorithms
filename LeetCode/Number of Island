@@ -44,7 +44,7 @@ public class NumberOfIslands {
             return 0;
         }
         
-        //set current index to 0
+        //set current index to 0 (if you don't add this, stack overflow error
         grid[i][j] = '0';
         
         // sink all neighbors of current index
