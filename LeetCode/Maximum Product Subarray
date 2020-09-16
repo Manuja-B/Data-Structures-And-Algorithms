@@ -1,0 +1,71 @@
+Given an integer array nums, find the contiguous subarray within an array (containing at least one number) which has the largest product.
+
+Example 1:
+
+Input: [2,3,-2,4]
+Output: 6
+Explanation: [2,3] has the largest product 6.
+Example 2:
+
+Input: [-2,0,-1]
+Output: 0
+Explanation: The result cannot be 2, because [-2,-1] is not a subarray.
+
+Solution:
+class Solution {
+    /*brute force TC: n2 SC: 1
+    public int maxProduct(int[] nums) {
+        if(nums.length==0) return 0;
+       int ans = Integer.MIN_VALUE; //important to initialize this as min value, becuase there can be negative numbers so if you keep as 1 not all testcases will pass
+        for(int i=0; i<nums.length; i++){
+            int curr=1;
+            for(int j=i; j<nums.length; j++){
+                curr*=nums[j];
+                ans=Math.max(curr,ans);
+            }
+        }
+        return ans;
+    }*/
+    
+    // Kadane's algorithm TC: n, SC: 1
+    public int maxProduct(int[] nums){
+        int currMax=nums[0];
+        int currMin=nums[0];
+        int ans=nums[0];
+        
+        for(int i=1; i<nums.length; i++){
+            int temp=currMax;
+            currMax = Math.max(temp*nums[i], Math.max(currMin*nums[i], nums[i]));
+            currMin = Math.min(temp*nums[i], Math.min(currMin*nums[i], nums[i]));
+            
+            ans = Math.max(ans, currMax);
+        }
+        return ans;
+    }
+    
+    /*Other simple most efficient solution
+    public int maxProduct(int[] nums) {
+        int product = 1;
+        int maxProduct = Integer.MIN_VALUE;
+
+        for (int i = 0; i < nums.length; i++) {
+            product *= nums[i];          
+            maxProduct = Math.max(maxProduct, product);
+            if (product == 0) {
+                product = 1;
+            }
+        }
+        
+        product = 1;
+        for (int i = nums.length - 1; i >= 0; i--) {
+            product *= nums[i];          
+            maxProduct = Math.max(maxProduct, product);
+            if (product == 0) {
+                product = 1;
+            }
+        }
+        
+        return maxProduct;
+    }*/
+    
+}
