@@ -16,24 +16,22 @@ Output: 2
 Explanation: 
 class Solution {
     public int leastBricks(List<List<Integer>> wall) {
-        //The idea is straightforward, since each brick length is positive, we can record all the edge index in the wall and figure out which edge index is the most common. We cut through that edge index, it will cross number of rows - most common edge count rows
-        HashMap < Integer, Integer > map = new HashMap < > ();
-        for (List < Integer > row: wall) {
+        //The idea is straightforward, since each brick length is positive, we can record all the edge index in the wall and figure out which edge index is the most common.
+        //We cut through that edge index, it will cross number of rows - most common edge count rows
+        Map<Integer, Integer> map = new HashMap();
+        
+        int count = 0;
+        for (List<Integer> row : wall) {
             int sum = 0;
             
             //the range is row.size()-1 because for the last column we would however pass without crossing any bricks, so we dont consider that
             for (int i = 0; i < row.size() - 1; i++) {
-                
                 sum += row.get(i);
-                if (map.containsKey(sum))
-                    map.put(sum, map.get(sum) + 1);
-                else
-                    map.put(sum, 1);
+                map.put(sum, map.getOrDefault(sum, 0) + 1);
+                count = Math.max(count, map.get(sum));
             }
         }
-        int res = wall.size();
-        for (int key: map.keySet())
-            res = Math.min(res, wall.size() - map.get(key));
-        return res;
+        
+        return wall.size() - count;
     }
 }
