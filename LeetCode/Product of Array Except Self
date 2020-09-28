@@ -10,16 +10,16 @@ Note: Please solve it without division and in O(n).
 Follow up:
 Could you solve it with constant space complexity? (The output array does not count as extra space for the purpose of space complexity analysis.)
 
-Solution:
+Solution 1:
 class Solution {
 public int[] productExceptSelf(int[] nums) {
 int n = nums.length;
 int o[] = new int[nums.length];
 for(int i = 0 ; i < n ; i++){
 int prod = 1;
-for(int j = i+1 ; j < n ; j++){
-prod = prod*nums[j];
-}
+        for(int j = i+1 ; j < n ; j++){
+                prod = prod*nums[j];
+        }
 
         for(int j = 0 ; j < i ; j++){
             prod = prod*nums[j];
@@ -31,3 +31,24 @@ prod = prod*nums[j];
     return o;
 }
 }
+
+Solution 2:
+//Find the left cummulative prod by looping 0 to n i.e. for [1,2,3,4] it is res=[1,2,6,24]
+//Traverse n to 1 and set res as res[i-1]*prod . The prod is basically cummulative right product
+class Solution {
+    public int[] productExceptSelf(int[] nums) {
+        int[] result = new int[nums.length];
+        int prod=1;
+        for (int i = 0; i < nums.length; i++) {
+            prod*=nums[i];
+            result[i] = prod;
+        }
+        prod=1;
+        for (int i = nums.length - 1; i > 0; i--) {
+            result[i] =result[i-1]*prod;
+            prod*=nums[i];
+        }
+        result[0]=prod;
+    return result;
+   }
+ }
