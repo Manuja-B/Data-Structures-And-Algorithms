@@ -35,3 +35,29 @@ class Solution {
     }
   }
 }
+
+class Solution {
+    public int maxDepth(TreeNode root) {
+        Stack<TreeNode> s=new Stack<>();
+        Stack<Integer> l=new Stack<>();
+        if(root==null) return 0;
+        s.push(root);
+        l.push(1);
+        int max=0;
+        while(!s.isEmpty()){
+            TreeNode curr=s.pop();
+            int res=l.pop();
+            max=Math.max(res,max);
+            if(curr.left!=null){
+                s.push(curr.left);
+                l.push(res+1); //res++ doesn't work here as it's post increment. Also ++res doesn't work becuase we don't want to change the value of res but just add res+1 to the list
+            }
+            if(curr.right!=null){
+                s.push(curr.right);
+                l.push(res+1);
+            }
+            
+        }
+        return max;
+    }
+}
